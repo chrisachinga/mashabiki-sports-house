@@ -13,10 +13,19 @@ const ProductCarousel = () => {
       {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
-            <Image src={product.image} alt={product.name} fluid />
+            <Image
+              src={product.image}
+              alt={product.name}
+              fluid
+              style={{
+                maxHeight: '50vh', // Set height to half the viewport height
+                objectFit: 'cover', // Ensure the image maintains its aspect ratio
+                width: '100%', // Ensure it spans the full width of the container
+              }}
+            />
             <Carousel.Caption className='carousel-caption'>
               <h2 className='text-white text-right'>
-                {product.name} (${product.price})
+                {product.name} (KES. {product.price})
               </h2>
             </Carousel.Caption>
           </Link>
