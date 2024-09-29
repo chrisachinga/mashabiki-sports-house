@@ -29,15 +29,10 @@ const getProducts = asyncHandler(async (req, res) => {
 // @route   GET /api/products/:id
 // @access  Public
 const getProductById = asyncHandler(async (req, res) => {
-  // NOTE: checking for valid ObjectId to prevent CastError moved to separate
-  // middleware. See README for more info.
-
   const product = await Product.findById(req.params.id);
   if (product) {
     return res.json(product);
   } else {
-    // NOTE: this will run if a valid ObjectId but no product was found
-    // i.e. product may be null
     res.status(404);
     throw new Error('Product not found');
   }
@@ -57,6 +52,8 @@ const createProduct = asyncHandler(async (req, res) => {
     countInStock: 0,
     numReviews: 0,
     description: 'Sample description',
+    team: '', // Initial empty team
+    sportsType: 'football', // Default sportsType
   });
 
   const createdProduct = await product.save();
@@ -67,19 +64,20 @@ const createProduct = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, price, description, image, brand, category, countInStock } =
-    req.body;
+  const { name, price, description, image, brand, category, countInStock, team, sportsType } = req.body;
 
   const product = await Product.findById(req.params.id);
 
   if (product) {
-    product.name = name;
-    product.price = price;
-    product.description = description;
-    product.image = image;
-    product.brand = brand;
-    product.category = category;
-    product.countInStock = countInStock;
+    product.name = name || product.name;
+    product.price = price || product.price;
+    product.description = description || product.description;
+    product.image = image || product.image;
+    product.brand = brand || product.brand;
+    product.category = category || product.category;
+    product.countInStock = countInStock || product.countInStock;
+    product.team = team || product.team;
+    product.sportsType = sportsType || product.sportsType;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);
