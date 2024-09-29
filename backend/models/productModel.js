@@ -26,6 +26,7 @@ const productSchema = mongoose.Schema(
 		name: {
 			type: String,
 			required: true,
+			unique: true,
 		},
 		image: {
 			type: String,
@@ -63,6 +64,13 @@ const productSchema = mongoose.Schema(
 			type: Number,
 			required: true,
 			default: 0,
+		},
+		team: {
+			type: String,
+		},
+		sportsType: {
+			type: String,
+			enum: ['football', 'basketball', 'swimming', 'netball'],
 		},
 	},
 	{
