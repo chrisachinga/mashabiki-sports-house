@@ -18,9 +18,9 @@ const ProductCarousel = () => {
               alt={product.name}
               fluid
               style={{
-                maxHeight: '50vh', // Set height to half the viewport height
-                objectFit: 'cover', // Ensure the image maintains its aspect ratio
-                width: '100%', // Ensure it spans the full width of the container
+                maxHeight: '75vh', 
+                objectFit: 'cover',
+                width: '100%',
               }}
             />
             <Carousel.Caption className='carousel-caption'>
