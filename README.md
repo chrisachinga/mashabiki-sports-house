@@ -110,6 +110,11 @@ RESEND_API_KEY="re_ZnhUfrjR_QD2cDqdee3iYCrkfvPYFCYiXm"
 ### Run
 
 ```bash
+# migrate database tables
+npx prisma migrate dev
+
+# inspect the db on prisma
+npx prisma migrate dev
 
 # Run in development mode
 npm run dev
